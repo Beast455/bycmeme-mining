@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BYCmeme Mining</title>
+    <script>
+        let coins = 0;
+        let userId;
+
+        function getUserId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('user');
+        }
+
+        function tapToMine() {
+            coins += 1;
+            document.getElementById('coinCount').innerText = `Coins: ${coins}`;
+        }
+
+        function inviteFriends() {
+            const inviteLink = `${window.location.origin}${window.location.pathname}?user=${userId}`;
+            navigator.clipboard.writeText(inviteLink);
+            alert("Invite link copied to clipboard!");
+        }
+
+        window.onload = () => {
+            userId = getUserId() || 'defaultUser';
+            document.getElementById('userId').innerText = `User ID: ${userId}`;
+        };
+    </script>
+</head>
+<body>
+    <h1>Welcome to BYCmeme Mining</h1>
+    <p id="userId">User ID: defaultUser</p>
+    <button onclick="tapToMine()">Tap to Mine</button>
+    <p id="coinCount">Coins: 0</p>
+    <button onclick="inviteFriends()">Invite Friends</button>
+</body>
+</html>
